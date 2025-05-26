@@ -28,7 +28,7 @@ jobs:
 
       - name: Install dependencies via uv
         run: |
-          uv pip install --system --strict
+          uv pip install --system --strict --group default
 
       - name: Run training
         run: |
@@ -50,7 +50,7 @@ jobs:
 
       - name: Install dependencies via uv
         run: |
-          uv pip install --system --strict
+          uv pip install --system --strict --group default
 
       - name: Run evaluation
         run: |
