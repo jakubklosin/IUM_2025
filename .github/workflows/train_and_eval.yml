@@ -65,4 +65,4 @@ jobs:
           pip install -r requirements.txt
 
       - name: Run evaluation
-        run: python PyTorchPerdiction.py
+        run: python PyTorchPrediction.py
