@@ -1,0 +1,5 @@
+outs:
+- md5: 6fb1798c902447eb01ecde89dd6c0f1e
+  size: 4855
+  hash: md5
+  path: regression_model.pt
