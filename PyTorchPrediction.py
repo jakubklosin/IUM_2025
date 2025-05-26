@@ -15,12 +15,9 @@ X_test_tensor = torch.tensor(X_test.values, dtype=torch.float32)
 model = nn.Sequential(
     nn.Linear(X_test.shape[1], 64),
     nn.ReLU(),
-    nn.Dropout(0.3),
-    nn.Linear(64, 32),
-    nn.ReLU(),
-    nn.Dropout(0.3),
-    nn.Linear(32, 1)
+    nn.Linear(64, 1)
 )
+
 
 model.load_state_dict(torch.load("regression_model.pt"))
 model.eval()
