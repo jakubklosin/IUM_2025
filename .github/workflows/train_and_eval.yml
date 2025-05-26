@@ -25,17 +25,14 @@ jobs:
         with:
           python-version: "3.10"
 
-      - name: Install uv and create virtualenv
+      - name: Install dependencies
         run: |
-          pip install uv
-          uv venv .venv
-          source .venv/bin/activate
-          pip install --upgrade pip
-          uv pip install --all
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
 
       - name: Run training
         run: |
-          .venv/bin/python PyTorchLoader_MLflow.py --epochs ${{ github.event.inputs.epochs }} --lr ${{ github.event.inputs.learning_rate }}
+          python PyTorchLoader_MLflow.py --epochs ${{ github.event.inputs.epochs }} --lr ${{ github.event.inputs.learning_rate }}
 
       - name: Upload model artifact
         uses: actions/upload-artifact@v4
@@ -62,13 +59,10 @@ jobs:
         with:
           python-version: "3.10"
 
-      - name: Install uv and create virtualenv
+      - name: Install dependencies
         run: |
-          pip install uv
-          uv venv .venv
-          source .venv/bin/activate
-          pip install --upgrade pip
-          uv pip install --all
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
 
       - name: Run evaluation
-        run: .venv/bin/python PyTorchPerdiction.py
+        run: python PyTorchPerdiction.py
