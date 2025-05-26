@@ -1,0 +1,58 @@
+name: Train and evaluate model
+
+on:
+  workflow_dispatch:
+    inputs:
+      epochs:
+        description: 'Number of training epochs'
+        required: true
+        default: '50'
+      lr:
+        description: 'Learning rate'
+        required: true
+        default: '0.01'
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: supplypike/setup-uv@v1
+
+      - name: Install dependencies
+        run: uv pip install --system --strict
+
+  train:
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: supplypike/setup-uv@v1
+
+      - name: Install dependencies
+        run: uv pip install --system --strict
+
+      - name: Train model
+        run: |
+          python PyTorchLoader_mlflow.py --epochs ${{ github.event.inputs.epochs }} --lr ${{ github.event.inputs.lr }}
+
+  evaluate:
+    runs-on: ubuntu-latest
+    needs: train
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: supplypike/setup-uv@v1
+
+      - name: Install dependencies
+        run: uv pip install --system --strict
+
+      - name: Run evaluation
+        run: python PyTorchPerdiction.py
+
