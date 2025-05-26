@@ -21,12 +21,9 @@ model = nn.Sequential(
 
 model.load_state_dict(torch.load("regression_model.pt"))
 model.eval()
-
-# Wczytanie min i max ceny
-with open("price_minmax.txt", "r") as f:
-    lines = f.readlines()
-    price_min = float(lines[0].strip())
-    price_max = float(lines[1].strip())
+    
+price_min = 10
+price_max = 750
 
 # Predykcja
 with torch.no_grad():
